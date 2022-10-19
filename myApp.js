@@ -2,6 +2,7 @@ let express = require("express");
 let app = express();
 require("dotenv").config();
 const SECRET = process.env.MESSAGE_STYLE;
+
 console.log("Hello World");
 
 app.get("/", (req, res) => {
@@ -17,6 +18,13 @@ app.get("/json", (req, res) => {
   } else {
     res.json({ message: "Hello json" });
   }
+});
+
+app.use("/", function (req, res, next) {
+  console.log("I'm a middleware...");
+  console.log(` ${req.method} ${req.path} - ${req.ip} `);
+
+  next();
 });
 
 module.exports = app;
