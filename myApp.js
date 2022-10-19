@@ -2,7 +2,16 @@ let express = require("express");
 let app = express();
 require("dotenv").config();
 const SECRET = process.env.MESSAGE_STYLE;
+
 console.log("Hello World");
+
+// #7 Implement a Root-Level Request Logger Middleware
+app.use("/", function (req, res, next) {
+  console.log("I'm a middleware...");
+  console.log(` ${req.method} ${req.path} - ${req.ip} `);
+
+  next();
+});
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/index.html");
