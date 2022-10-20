@@ -28,4 +28,11 @@ app.get("/json", (req, res) => {
   }
 });
 
+app.use("/", function (req, res, next) {
+  console.log("I'm a middleware...");
+  console.log(` ${req.method} ${req.path} - ${req.ip} `);
+
+  next();
+});
+
 module.exports = app;
